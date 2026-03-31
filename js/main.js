@@ -24,7 +24,6 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.style.overflow = nav.classList.contains('open') ? 'hidden' : '';
     });
 
-    // Close mobile nav on link click
     nav.querySelectorAll('.nav-link').forEach(link => {
         link.addEventListener('click', () => {
             navToggle.classList.remove('active');
@@ -35,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Scroll reveal animations ---
     const revealElements = document.querySelectorAll(
-        '.section-text, .section-image, .card, .sfeer-content, .section-header'
+        '.content-block-text, .content-block-image, .green-content, .concept-item'
     );
 
     revealElements.forEach(el => el.classList.add('reveal'));
@@ -49,50 +48,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
         },
-        { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
+        { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
     );
 
     revealElements.forEach(el => revealObserver.observe(el));
-
-    // --- Animated counter for stats ---
-    const counters = document.querySelectorAll('.stat-number[data-count]');
-
-    const counterObserver = new IntersectionObserver(
-        (entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const el = entry.target;
-                    const target = parseInt(el.dataset.count, 10);
-                    animateCounter(el, target);
-                    counterObserver.unobserve(el);
-                }
-            });
-        },
-        { threshold: 0.5 }
-    );
-
-    counters.forEach(c => counterObserver.observe(c));
-
-    function animateCounter(el, target) {
-        const duration = 1500;
-        const start = performance.now();
-
-        function update(now) {
-            const progress = Math.min((now - start) / duration, 1);
-            const eased = 1 - Math.pow(1 - progress, 3);
-            const current = Math.round(eased * target);
-
-            el.textContent = target >= 1000
-                ? current.toLocaleString('nl-BE') + '+'
-                : current;
-
-            if (progress < 1) {
-                requestAnimationFrame(update);
-            }
-        }
-
-        requestAnimationFrame(update);
-    }
 
     // --- Smooth scroll for anchor links ---
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -117,13 +76,17 @@ document.addEventListener('DOMContentLoaded', () => {
             const originalText = btn.textContent;
             btn.textContent = 'Verstuurd!';
             btn.disabled = true;
-            btn.style.backgroundColor = '#4a7c59';
+            btn.style.backgroundColor = 'var(--color-green)';
+            btn.style.color = '#fff';
+            btn.style.borderColor = 'var(--color-green)';
 
             setTimeout(() => {
                 form.reset();
                 btn.textContent = originalText;
                 btn.disabled = false;
                 btn.style.backgroundColor = '';
+                btn.style.color = '';
+                btn.style.borderColor = '';
             }, 3000);
         });
     }
