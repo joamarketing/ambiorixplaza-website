@@ -21,7 +21,7 @@
 
     --container-width: 1200px;
     --section-padding: 100px;
-    --header-height: 80px;
+    --header-height: 120px;
 
     --transition: 0.3s ease;
 }
@@ -184,17 +184,18 @@ h1, h2, h3, h4 {
 }
 
 .logo-img {
-    height: 48px;
+    height: clamp(100px, 12vw, 150px);
     width: auto;
     filter: brightness(0) invert(1);
 }
 
 .header.scrolled .logo-img {
+    height: clamp(60px, 8vw, 80px);
     filter: brightness(0) invert(1);
 }
 
 .logo-img--footer {
-    height: 40px;
+    height: clamp(100px, 12vw, 150px);
     filter: brightness(0) invert(1);
     opacity: 0.8;
 }
@@ -203,11 +204,11 @@ h1, h2, h3, h4 {
 .nav {
     display: flex;
     align-items: center;
-    gap: 32px;
+    gap: 40px;
 }
 
 .nav-link {
-    font-size: 0.82rem;
+    font-size: 1rem;
     font-weight: 400;
     letter-spacing: 0.3px;
     color: rgba(255, 255, 255, 0.85);
@@ -270,7 +271,7 @@ h1, h2, h3, h4 {
    ======================================== */
 .hero {
     position: relative;
-    height: 85vh;
+    height: 100vh;
     min-height: 600px;
     overflow: hidden;
 }
@@ -299,9 +300,31 @@ h1, h2, h3, h4 {
 
 .hero-content {
     position: absolute;
-    bottom: 60px;
+    bottom: 100px;
     left: 40px;
     z-index: 2;
+}
+
+/* Scroll indicator */
+.hero-scroll {
+    position: absolute;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    color: var(--color-white);
+    opacity: 0.7;
+    transition: opacity var(--transition);
+    animation: scrollBounce 2s ease-in-out infinite;
+}
+
+.hero-scroll:hover {
+    opacity: 1;
+}
+
+@keyframes scrollBounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(8px); }
 }
 
 /* ========================================
@@ -568,7 +591,7 @@ h1, h2, h3, h4 {
 }
 
 .footer-logo .logo-img {
-    height: 40px;
+    height: clamp(100px, 12vw, 150px);
 }
 
 .footer-tagline {
@@ -652,7 +675,7 @@ h1, h2, h3, h4 {
 @media (max-width: 768px) {
     :root {
         --section-padding: 56px;
-        --header-height: 64px;
+        --header-height: 90px;
     }
 
     .container {
@@ -701,12 +724,12 @@ h1, h2, h3, h4 {
     }
 
     .hero {
-        height: 65vh;
-        min-height: 400px;
+        height: 100vh;
+        min-height: 500px;
     }
 
     .hero-content {
-        bottom: 40px;
+        bottom: 80px;
         left: 20px;
     }
 
