@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
             const btn = form.querySelector('button[type="submit"]');
             const originalText = btn.textContent;
-            btn.textContent = 'Verstuurd!';
+            btn.textContent = 'Ingeschreven!';
             btn.disabled = true;
             btn.style.backgroundColor = 'var(--color-green)';
             btn.style.color = '#fff';
