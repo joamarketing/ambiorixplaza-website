@@ -59,10 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const target = document.querySelector(anchor.getAttribute('href'));
             if (target) {
                 e.preventDefault();
-                header.style.transition = 'none';
-                header.classList.add('scrolled');
                 const offset = header.offsetHeight;
-                header.style.transition = '';
                 const top = target.getBoundingClientRect().top + window.scrollY - offset;
                 window.scrollTo({ top, behavior: 'smooth' });
             }
